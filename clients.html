@@ -1,80 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clients — Charles Consultancy</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <div class="bg-top navbar-light">
-      <div class="container">
-        <div class="row no-gutters d-flex align-items-center align-items-stretch">
-          <div class="col-md-4 d-flex align-items-center py-4">
-            <a class="navbar-brand" href="index.html">Charles Counstancy</a>
-          </div>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root { --primary: #2563eb; --secondary: #1e40af; --text: #1f2937; --light: #f3f4f6; }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 32px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text);
+      }
+
+      .navigation {
+        display: flex;
+        gap: 28px;
+      }
+
+      .navigation a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .navigation a:hover {
+        color: var(--primary);
+      }
+
+      .page-hero {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        padding: 60px 32px;
+        text-align: center;
+      }
+
+      .page-hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .page-hero p {
+        font-size: 1.125rem;
+        color: #6b7280;
+      }
+
+      section {
+        padding: 80px 32px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 50px;
+        text-align: center;
+        color: var(--text);
+      }
+
+      .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+
+      .partner-card {
+        background: #fff;
+        padding: 50px 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+        text-align: center;
+      }
+
+      .partner-card:hover {
+        box-shadow: 0 12px 30px rgba(37,99,235,0.2);
+        transform: translateY(-5px);
+      }
+
+      .partner-card img {
+        max-width: 120px;
+        height: auto;
+        margin-bottom: 25px;
+      }
+
+      .partner-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--text);
+      }
+
+      .partner-card p {
+        color: #6b7280;
+        line-height: 1.8;
+      }
+
+      /* Footer (unified) */
+      .site-footer {
+        background: #f6f7fb;
+        color: #0f172a;
+        padding: 48px 20px;
+      }
+      .site-footer .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .site-footer .footer-col { flex: 1 1 200px; min-width: 180px }
+      .site-footer .footer-logo { font-weight: 700; margin-bottom: 8px }
+      .site-footer .footer-title { font-size: 1.125rem; margin-bottom: 14px; color: #0f172a }
+      .site-footer .footer-links a { display:block; color:#111827; text-decoration:none; margin:10px 0 }
+      .site-footer .subscribe { display:flex; gap:0; align-items:center }
+      .site-footer .subscribe input{flex:1;padding:12px 14px;border:1px solid #e6e7eb;border-radius:6px 0 0 6px;background:#fff}
+      .site-footer .subscribe button{padding:10px 14px;border:none;background:#111827;color:#fff;border-radius:0 6px 6px 0;cursor:pointer}
+      .site-footer hr{border:none;border-top:1px solid #e6e7eb;margin:28px 0}
+      .site-footer .bottom-row{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+      .site-footer .social-icons a{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;background:#fff;border:1px solid #e6e7eb;color:#111827;text-decoration:none;margin-left:8px}
+      @media(max-width:800px){
+        .site-footer .footer-grid{flex-direction:column}
+        .site-footer .bottom-row{flex-direction:column;align-items:flex-start}
+      }
+
+      @media(max-width: 768px) {
+        header { padding: 16px 20px; }
+        .menu-btn { display: block; }
+        .navigation {
+          display: none;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: #fff;
+          padding: 20px;
+          gap: 10px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .navigation.active { display: flex; }
+        .partners-grid { grid-template-columns: 1fr; }
+        section { padding: 60px 20px; }
+        .page-hero { padding: 40px 20px; }
+        .page-hero h1 { font-size: 1.8rem; }
+      }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="brand">Charles Consultancy</a>
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="project.html">Projects</a>
+        <a href="clients.html">Clients</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<div class="page-hero">
+    <h1>Our Clients</h1>
+    <p>Trusted by leading organizations worldwide</p>
+</div>
+
+<section class="container" data-aos="fade-up">
+    <h2 class="section-title">Partners & Collaborators</h2>
+    <div class="partners-grid">
+        <div class="partner-card" data-aos="zoom-in" data-aos-delay="0">
+            <img src="images/who (2).jpg" alt="WHO">
+            <h3>World Health Organization</h3>
+            <p>Collaborating on global disease surveillance, outbreak response coordination, and public health capacity building initiatives across multiple regions.</p>
         </div>
+        
+        <div class="partner-card" data-aos="zoom-in" data-aos-delay="100">
+            <i style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;" class="fas fa-hospital"></i>
+            <h3>Ministry of Health</h3>
+            <p>Supporting national health ministries in designing and implementing surveillance systems, analyzing disease trends, and evaluating public health programs.</p>
+        </div>
+        <div class="partner-card" data-aos="zoom-in" data-aos-delay="0">
+            <img src="images/Logo_jica.svg.png" alt="WHO">
+            <h3>Japan international cooperation agency</h3>
+            <p>Collaborating on global disease surveillance, outbreak response coordination, and public health capacity building initiatives across multiple regions.</p>
+        </div>
+        
+        <div class="partner-card" data-aos="zoom-in" data-aos-delay="200">
+            <i style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;" ></i>
+             <img src="images/unza.png" alt="WHO">
+            <h3>Academic Institutions</h3>
+            <p>Partnering with universities and research institutions on epidemiological studies, surveillance research, and training programs for the next generation of public health professionals.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">Company Logo</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-title">Charles Consultancy</div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light">
-      <div class="container d-flex align-items-center">
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item active"><a href="clients.html" class="nav-link">Clients</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          </ul>
-        </div>
+    <div class="footer-col">
+      <div class="footer-title">Quick Link</div>
+      <div class="footer-links">
+        <a href="clients.html">Clients</a>
+        <a href="index.html">Home</a>
       </div>
-    </nav>
+    </div>
+    <div class="footer-col">
+      <div class="footer-title">Subscribe</div>
+      <form class="subscribe" onsubmit="event.preventDefault();">
+        <input type="email" placeholder="Get product updates" aria-label="Email">
+        <button aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="bottom-row">
+    <div>© <span id="year"></span> Charles Consultancy. All rights reserved. | Developed by <a href="../goodsonPortfolio/index.html" target="_blank" rel="noopener">Goodson Mumbelunga</a></div>
+    <div class="social-icons">
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+</footer>
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">Our Clients</h1>
-            <p class="breadcrumbs">Trusted by international and national partners</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({ offset: 100, duration: 800 });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    const menuBtn = document.getElementById('menuBtn');
+    const navigation = document.getElementById('navigation');
+    menuBtn.addEventListener('click', () => navigation.classList.toggle('active'));
+    document.querySelectorAll('.navigation a').forEach(link => {
+        link.addEventListener('click', () => navigation.classList.remove('active'));
+    });
+</script>
 
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <div class="client-card">
-              <img src="images/person_1.jpg" alt="WHO" style="max-width:100%;height:120px;object-fit:contain">
-              <h3>World Health Organization (WHO)</h3>
-              <p>International health partner</p>
-            </div>
-          </div>
-          <div class="col-md-4 text-center">
-            <div class="client-card">
-              <img src="images/person_2.jpg" alt="JICA" style="max-width:100%;height:120px;object-fit:contain">
-              <h3>Japan International Cooperation Agency (JICA)</h3>
-              <p>Development partner</p>
-            </div>
-          </div>
-          <div class="col-md-4 text-center">
-            <div class="client-card">
-              <img src="images/person_3.jpg" alt="Others" style="max-width:100%;height:120px;object-fit:contain">
-              <h3>Other Health Organizations</h3>
-              <p>National and local partners</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container text-center">
-        <p>© 2024 Charles Consultancy. All rights reserved</p>
-      </div>
-    </footer>
-
-  </body>
+</body>
 </html>
