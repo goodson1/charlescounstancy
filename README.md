@@ -1,4 +1,4 @@
-# Charles Counstancy - Professional Services Website
+# Charles Consultantancy - Epidemiology Services Website
 
 A modern, responsive website template for professional services and portfolio showcase.
 
