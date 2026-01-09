@@ -1,4 +1,4 @@
-# Charles Consultantancy - Epidemiology Services Website
+# Charles Consultancy - Epidemiology Services Website
 
 A modern, responsive website template for professional services and portfolio showcase.
 
